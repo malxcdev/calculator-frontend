@@ -3,6 +3,8 @@
 @theme{
     --font-display: 'Plus Jakarta Sans', sans-serif;
     --color-lime: hsl(61, 70%, 52%);
+    --color-lime-light: hsl(61, 70%, 75%);
+    --color-lime-lighter: hsl(61, 70%, 85%);
     --color-bright-red: hsl(4, 69%, 50%);
     --color-white: hsl(0, 0%, 100%);
     --color-slate-100: hsl(202, 86%, 94%);

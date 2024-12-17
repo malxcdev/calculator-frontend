@@ -78,7 +78,7 @@ function Calculator() {
             <div
               className={
                 "flex items-center gap-2 px-4 py-3 border-2 rounded-md font-bold cursor-pointer text-slate-900 " +
-                (isRepayment ? "bg-lime border-blue-500" : "border-slate-400")
+                (isRepayment ? "bg-lime-lighter border-lime" : "border-slate-400")
               }
               onClick={toggleRepayment}
             >
@@ -86,24 +86,45 @@ function Calculator() {
                 type="checkbox"
                 id="repayment-checkbox"
                 name="repayment-checkbox"
-                className="w-5 h-5 border-2 border-gray-500 rounded-full appearance-none cursor-pointer"
+                className={`
+    w-5 h-5 border-2 rounded-full cursor-pointer appearance-none
+    border-gray-500            /* Borde por defecto */
+    checked:bg-lime       /* Fondo lima al hacer check */
+  `}
                 checked={isRepayment}
                 onChange={toggleRepayment}
               />
+
               <label htmlFor="repayment-checkbox" className="cursor-pointer">
                 Repayment
               </label>
             </div>
 
             {/* Interest Only */}
-            <label className="flex items-center gap-2 cursor-pointer">
+            <div
+              className={
+                "flex items-center gap-2 px-4 py-3 border-2 rounded-md font-bold cursor-pointer text-slate-900 " +
+                (isRepayment ? "bg-lime-lighter border-lime" : "border-slate-400")
+              }
+              onClick={toggleRepayment}
+            >
               <input
                 type="checkbox"
-                name="interest-only"
-                className="w-5 h-5 border-2 border-gray-500 rounded-full appearance-none cursor-pointer"
+                id="repayment-checkbox"
+                name="repayment-checkbox"
+                className={`
+    w-5 h-5 border-2 rounded-full cursor-pointer appearance-none
+    border-gray-500            /* Borde por defecto */
+    checked:bg-lime       /* Fondo lima al hacer check */
+  `}
+                checked={isRepayment}
+                onChange={toggleRepayment}
               />
-              <span>Interest Only</span>
-            </label>
+
+              <label htmlFor="repayment-checkbox" className="cursor-pointer">
+              Interest Only
+              </label>
+            </div>
           </div>
 
           <button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md font-semibold hover:bg-blue-600">
