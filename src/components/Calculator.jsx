@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 
 function Calculator() {
+  // Estado que controla si el checkbox de Repayment está seleccionado
+  const [isRepayment, setIsRepayment] = useState(false);
+
+  // Función para manejar clics y cambios en el checkbox “Repayment”
+  const toggleRepayment = () => {
+    setIsRepayment((prev) => !prev);
+  };
+
   return (
     <section className="flex flex-col p-2">
       <div className="bg-white p-4">
@@ -12,86 +20,104 @@ function Calculator() {
             Clear All
           </a>
         </div>
+
         <form className="">
+          {/* Mortgage Amount */}
           <div className="flex flex-col gap-2 mb-6">
-            <label className="text-slate-700 font-medium">
-              Mortgage Amount
-            </label>
+            <label className="text-slate-700 font-medium">Mortgage Amount</label>
             <div className="relative flex items-center">
-              <span className="absolute left-0 rounded-l-md font-bold text-gray-500 text-lg pointer-events-none bg-slate-200 px-4 justify-center items-center flex z-0 h-full">
+              <span className="absolute left-0 rounded-l-md font-bold text-gray-500 text-lg pointer-events-none bg-slate-200 px-4 flex items-center h-full">
                 £
               </span>
               <input
                 id="mortgage"
                 type="text"
-                value="300,000"
+                defaultValue="300,000"
                 className="pl-14 pr-4 py-2 border-2 border-gray-400 rounded-md overflow-hidden focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 font-semibold text-lg w-full z-10"
               />
             </div>
           </div>
-          <div className="">
-            <div className="mb-6">
-              <label className="text-slate-700 font-medium">Mortgage Term</label>
-              <div className="relative flex items-center">
-                <span className="absolute right-0 rounded-l-md font-bold text-gray-500 text-lg pointer-events-none bg-slate-200 h-full px-4 justify-center items-center flex z-0">
-                  years
-                </span>
-                <input
-                  id="mortgage"
-                  type="text"
-                  value="25"
-                  className="pl-4 pr-4 py-2 border-2 border-gray-400 rounded-md overflow-hidden focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 font-semibold text-lg w-full z-10"
-                />
-              </div>
-            </div>
-            <div className="mb-6">
-              <label className="text-slate-700 font-medium">Interest Rate</label>
-              <div className="relative flex items-center">
-                <span className="absolute right-0 rounded-l-md font-bold text-gray-500 text-lg pointer-events-none bg-slate-200 h-full px-4 justify-center items-center flex z-0">
-                  %
-                </span>
-                <input
-                  id="mortgage"
-                  type="text"
-                  value="25"
-                  className="pl-4 pr-4 py-2 border-2 border-gray-400 rounded-md overflow-hidden focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 font-semibold text-lg w-full z-10"
-                />
-              </div>
+
+          {/* Mortgage Term */}
+          <div className="mb-6">
+            <label className="text-slate-700 font-medium">Mortgage Term</label>
+            <div className="relative flex items-center">
+              <span className="absolute right-0 rounded-l-md font-bold text-gray-500 text-lg pointer-events-none bg-slate-200 h-full px-4 flex items-center">
+                years
+              </span>
+              <input
+                id="mortgage"
+                type="text"
+                defaultValue="25"
+                className="pl-4 pr-4 py-2 border-2 border-gray-400 rounded-md overflow-hidden focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 font-semibold text-lg w-full z-10"
+              />
             </div>
           </div>
+
+          {/* Interest Rate */}
+          <div className="mb-6">
+            <label className="text-slate-700 font-medium">Interest Rate</label>
+            <div className="relative flex items-center">
+              <span className="absolute right-0 rounded-l-md font-bold text-gray-500 text-lg pointer-events-none bg-slate-200 h-full px-4 flex items-center">
+                %
+              </span>
+              <input
+                id="mortgage"
+                type="text"
+                defaultValue="25"
+                className="pl-4 pr-4 py-2 border-2 border-gray-400 rounded-md overflow-hidden focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 font-semibold text-lg w-full z-10"
+              />
+            </div>
+          </div>
+
+          {/* Mortgage Type */}
           <div className="flex flex-col gap-2">
             <label className="text-slate-700 font-medium">Mortgage Type</label>
-            <div className="flex items-center gap-2 px-4 py-3 border-2 border-slate-400 rounded-md font-bold cursor-pointer text-slate-900" id="repayment-container">
+
+            {/* Contenedor ‘Repayment’ */}
+            <div
+              className={
+                "flex items-center gap-2 px-4 py-3 border-2 rounded-md font-bold cursor-pointer text-slate-900 " +
+                (isRepayment ? "bg-lime border-blue-500" : "border-slate-400")
+              }
+              onClick={toggleRepayment}
+            >
               <input
                 type="checkbox"
                 id="repayment-checkbox"
                 name="repayment-checkbox"
-                className="w-5 h-5 border-2 border-gray-500 rounded-full appearance-none cursor-pointer "
-                onChange={(e) => {
-                  const container = document.getElementById('repayment-container');
-                  if (e.target.checked) {
-                    container.classList.add('bg-lime', 'border-blue-500');
-                  } else {
-                    container.classList.remove('bg-lime', 'border-blue-500');
-                  }
-                }}
+                className="w-5 h-5 border-2 border-gray-500 rounded-full appearance-none cursor-pointer"
+                checked={isRepayment}
+                onChange={toggleRepayment}
               />
-              Repayment
+              <label htmlFor="repayment-checkbox" className="cursor-pointer">
+                Repayment
+              </label>
             </div>
 
-            <label>
-              <input type="checkbox" name="" id="" />
-              Interest Only
+            {/* Interest Only */}
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                name="interest-only"
+                className="w-5 h-5 border-2 border-gray-500 rounded-full appearance-none cursor-pointer"
+              />
+              <span>Interest Only</span>
             </label>
           </div>
-          <button>Calculate Repayment</button>
+
+          <button className="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md font-semibold hover:bg-blue-600">
+            Calculate Repayment
+          </button>
         </form>
       </div>
-      <div>
+
+      {/* Results Section */}
+      <div className="mt-4 p-4">
         <img src="" alt="" />
-        <h2>Result Shown Here</h2>
+        <h2 className="text-xl font-bold">Result Shown Here</h2>
         <p>
-          Complete the form and click "calculate repayments" to see what your
+          Complete the form and click "Calculate Repayment" to see what your
           monthly repayments would be.
         </p>
       </div>
